@@ -1,6 +1,7 @@
 {
   "name": "sistema-os-assistencia",
-  "lockfileVersion": 3,
-  "requires": true,
-  "packages": {}
+  "version": "1.0.0",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
 }
