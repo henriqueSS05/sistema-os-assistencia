@@ -103,32 +103,77 @@
             <div class="grid-3">
               <label>
                 Tipo
-                <input id="aparelho_tipo" placeholder="Celular, notebook, TV..." />
+                <select id="aparelho_tipo">
+                  <option value="">Selecione</option>
+                  <option value="Celular">Celular</option>
+                  <option value="Notebook">Notebook</option>
+                  <option value="TV">TV</option>
+                  <option value="Tablet">Tablet</option>
+                  <option value="Computador">Computador</option>
+                  <option value="Videogame">Videogame</option>
+                  <option value="Outro">Outro</option>
+                </select>
               </label>
 
               <label>
                 Marca
-                <input id="aparelho_marca" />
+                <select id="aparelho_marca">
+                  <option value="">Selecione</option>
+                  <option value="Samsung">Samsung</option>
+                  <option value="Apple">Apple</option>
+                  <option value="Motorola">Motorola</option>
+                  <option value="Xiaomi">Xiaomi</option>
+                  <option value="LG">LG</option>
+                  <option value="Lenovo">Lenovo</option>
+                  <option value="Dell">Dell</option>
+                  <option value="Acer">Acer</option>
+                  <option value="Asus">Asus</option>
+                  <option value="Sony">Sony</option>
+                  <option value="Philips">Philips</option>
+                  <option value="Outro">Outro</option>
+                </select>
               </label>
 
-              <label>
+             <label>
                 Modelo
-                <input id="aparelho_modelo" />
+                <input id="aparelho_modelo" placeholder="Ex.: Galaxy A15, iPhone 13..." />
               </label>
 
               <label>
                 Serial / IMEI
-                <input id="aparelho_serial" />
+                <input id="aparelho_serial" placeholder="Digite o serial ou IMEI" />
               </label>
 
               <label>
                 Cor
-                <input id="aparelho_cor" />
+                <select id="aparelho_cor">
+                  <option value="">Selecione</option>
+                  <option value="Preto">Preto</option>
+                  <option value="Branco">Branco</option>
+                  <option value="Azul">Azul</option>
+                  <option value="Vermelho">Vermelho</option>
+                  <option value="Verde">Verde</option>
+                  <option value="Cinza">Cinza</option>
+                  <option value="Prata">Prata</option>
+                  <option value="Dourado">Dourado</option>
+                  <option value="Rosa">Rosa</option>
+                  <option value="Outro">Outro</option>
+                </select>
               </label>
 
               <label>
                 Acessórios
-                <input id="aparelho_acessorios" />
+                <select id="aparelho_acessorios" multiple size="6">
+                  <option value="Nenhum">Nenhum</option>
+                  <option value="Carregador">Carregador</option>
+                  <option value="Cabo">Cabo</option>
+                  <option value="Fonte">Fonte</option>
+                  <option value="Capa">Capa</option>
+                  <option value="Chip">Chip</option>
+                  <option value="Cartão de memória">Cartão de memória</option>
+                  <option value="Bateria">Bateria</option>
+                  <option value="Outro">Outro</option>
+                </select>
               </label>
             </div>
           </div>
@@ -156,12 +201,30 @@
 
             <label>
               Serviço realizado
-              <textarea id="servico_realizado" rows="4"></textarea>
+
+              <select id="servico_realizado" multiple size="7">
+                <option value="Troca de tela">Troca de tela</option>
+                <option value="Troca de bateria">Troca de bateria</option>
+                <option value="Troca de conector de carga">Troca de conector de carga</option>
+                <option value="Troca de câmera">Troca de câmera</option>
+                <option value="Troca de alto-falante">Troca de alto-falante</option>
+                <option value="Troca de microfone">Troca de microfone</option>
+                <option value="Limpeza interna">Limpeza interna</option>
+                <option value="Formatação">Formatação</option>
+                <option value="Atualização de sistema">Atualização de sistema</option>
+                <option value="Reparo em placa">Reparo em placa</option>
+                <option value="Solda">Solda</option>
+                <option value="Outro">Outro</option>
+              </select>
             </label>
 
             <label>
               Peças utilizadas
-              <textarea id="pecas_utilizadas" rows="3"></textarea>
+              <textarea
+                id="pecas_utilizadas"
+                rows="3"
+                placeholder="Ex.: Tela Samsung A15, bateria, conector USB-C..."
+              ></textarea>
             </label>
           </div>
 
@@ -178,19 +241,10 @@
             <h2>7. Valores</h2>
 
             <div class="grid-2">
-              <label>
-                Valor das peças
-                <input id="valor_pecas" type="number" step="0.01" value="0" />
-              </label>
 
               <label>
-                Mão de obra
-                <input id="valor_mao_obra" type="number" step="0.01" value="0" />
-              </label>
-
-              <label>
-                Desconto
-                <input id="desconto" type="number" step="0.01" value="0" />
+                Serviço
+                <input id="valor_servico" type="number" step="0.01" value="0" />
               </label>
 
               <label>
@@ -334,17 +388,6 @@
 
           <div id="detalhe-conteudo" class="detail-grid"></div>
 
-          <div class="assinaturas-print">
-            <div>
-              <span></span>
-              Técnico responsável
-            </div>
-
-            <div>
-              <span></span>
-              Cliente
-            </div>
-          </div>
 
         </div>
       </section>
