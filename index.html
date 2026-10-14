@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Assistência Técnica</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">Assistência Técnica</div>
+
+      <button class="nav-btn active" data-view="dashboard">Painel</button>
+      <button class="nav-btn" data-view="nova">Nova OS</button>
+      <button class="nav-btn" data-view="ordens">Ordens de Serviço</button>
+    </aside>
+
+    <main class="content">
+
+      <!-- PAINEL -->
+      <section id="view-dashboard" class="view active">
+        <div class="page-header">
+          <div>
+            <h1>Painel</h1>
+            <p>Visão geral da assistência técnica.</p>
+          </div>
+
+          <button class="primary" id="btn-nova-dashboard">
+            + Nova OS
+          </button>
+        </div>
+
+        <div class="cards">
+          <div class="card">
+            <span>OS cadastradas</span>
+            <strong id="card-total">0</strong>
+          </div>
+
+          <div class="card">
+            <span>Abertas</span>
+            <strong id="card-abertas">0</strong>
+          </div>
+
+          <div class="card">
+            <span>Em andamento</span>
+            <strong id="card-andamento">0</strong>
+          </div>
+
+          <div class="card">
+            <span>Prontas</span>
+            <strong id="card-prontas">0</strong>
+          </div>
+        </div>
+
+        <div class="panel highlight">
+          <span>Faturamento cadastrado</span>
+          <strong id="faturamento">R$ 0,00</strong>
+        </div>
+
+        <div class="panel">
+          <div class="panel-title">Últimas ordens</div>
+          <div id="recentes" class="list"></div>
+        </div>
+      </section>
+
+      <!-- NOVA / EDITAR OS -->
+      <section id="view-nova" class="view">
+        <div class="page-header">
+          <div>
+            <h1 id="form-title">Nova Ordem de Serviço</h1>
+            <p>Dados do cliente e do aparelho ficam juntos na OS.</p>
+          </div>
+        </div>
+
+        <form id="os-form" class="form-grid">
+          <input type="hidden" id="os-id" />
+
+          <div class="section-card span-2">
+            <h2>1. Cliente</h2>
+
+            <div class="grid-3">
+              <label>
+                Nome do cliente *
+                <input id="cliente_nome" required />
+              </label>
+
+              <label>
+                CPF / CNPJ
+                <input id="cliente_documento" />
+              </label>
+
+              <label>
+                Telefone / WhatsApp
+                <input id="cliente_telefone" />
+              </label>
+            </div>
+          </div>
+
+          <div class="section-card span-2">
+            <h2>2. Aparelho</h2>
+
+            <div class="grid-3">
+              <label>
+                Tipo
+                <input id="aparelho_tipo" placeholder="Celular, notebook, TV..." />
+              </label>
+
+              <label>
+                Marca
+                <input id="aparelho_marca" />
+              </label>
+
+              <label>
+                Modelo
+                <input id="aparelho_modelo" />
+              </label>
+
+              <label>
+                Serial / IMEI
+                <input id="aparelho_serial" />
+              </label>
+
+              <label>
+                Cor
+                <input id="aparelho_cor" />
+              </label>
+
+              <label>
+                Acessórios
+                <input id="aparelho_acessorios" />
+              </label>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <h2>3. Defeito</h2>
+
+            <label>
+              Defeito relatado
+              <textarea id="defeito_relatado" rows="5"></textarea>
+            </label>
+          </div>
+
+          <div class="section-card">
+            <h2>4. Diagnóstico</h2>
+
+            <label>
+              Diagnóstico técnico
+              <textarea id="diagnostico" rows="5"></textarea>
+            </label>
+          </div>
+
+          <div class="section-card">
+            <h2>5. Serviço</h2>
+
+            <label>
+              Serviço realizado
+              <textarea id="servico_realizado" rows="4"></textarea>
+            </label>
+
+            <label>
+              Peças utilizadas
+              <textarea id="pecas_utilizadas" rows="3"></textarea>
+            </label>
+          </div>
+
+          <div class="section-card">
+            <h2>6. Testes</h2>
+
+            <label>
+              Testes realizados
+              <textarea id="testes_realizados" rows="4"></textarea>
+            </label>
+          </div>
+
+          <div class="section-card">
+            <h2>7. Valores</h2>
+
+            <div class="grid-2">
+              <label>
+                Valor das peças
+                <input id="valor_pecas" type="number" step="0.01" value="0" />
+              </label>
+
+              <label>
+                Mão de obra
+                <input id="valor_mao_obra" type="number" step="0.01" value="0" />
+              </label>
+
+              <label>
+                Desconto
+                <input id="desconto" type="number" step="0.01" value="0" />
+              </label>
+
+              <label>
+                Total
+                <input id="valor_total" readonly value="R$ 0,00" />
+              </label>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <h2>8. Finalização</h2>
+
+            <label>
+              Garantia
+              <input id="garantia" placeholder="Ex.: 90 dias" />
+            </label>
+
+            <label>
+              Status
+              <select id="status">
+                <option>Aberta</option>
+                <option>Em andamento</option>
+                <option>Aguardando peça</option>
+                <option>Pronta</option>
+                <option>Entregue</option>
+                <option>Cancelada</option>
+              </select>
+            </label>
+
+            <label>
+              Observações
+              <textarea id="observacoes" rows="4"></textarea>
+            </label>
+          </div>
+
+          <div class="form-actions span-2">
+            <button type="button" class="ghost" id="btn-cancelar-form">
+              Cancelar
+            </button>
+
+            <button type="submit" class="primary">
+              Salvar Ordem de Serviço
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- LISTA DE OS -->
+      <section id="view-ordens" class="view">
+        <div class="page-header">
+          <div>
+            <h1>Ordens de Serviço</h1>
+            <p>Busque, filtre, abra, edite ou exclua uma OS.</p>
+          </div>
+        </div>
+
+        <div class="search-row">
+          <input
+            id="busca"
+            placeholder="Buscar por nº, cliente, telefone, marca, modelo ou IMEI"
+          />
+
+          <button class="primary" id="btn-buscar">
+            Buscar
+          </button>
+        </div>
+
+        <div class="filtros-row">
+          <select id="filtro-status">
+            <option value="">Todos os status</option>
+            <option value="Aberta">Aberta</option>
+            <option value="Em andamento">Em andamento</option>
+            <option value="Aguardando peça">Aguardando peça</option>
+            <option value="Pronta">Pronta</option>
+            <option value="Entregue">Entregue</option>
+            <option value="Cancelada">Cancelada</option>
+          </select>
+
+          <select id="filtro-data">
+            <option value="">Todas as datas</option>
+            <option value="hoje">Hoje</option>
+            <option value="7">Últimos 7 dias</option>
+            <option value="30">Últimos 30 dias</option>
+          </select>
+
+          <input id="filtro-marca" placeholder="Marca" />
+          <input id="filtro-tipo" placeholder="Tipo de aparelho" />
+
+          <button class="primary" id="btn-filtrar">
+            Filtrar
+          </button>
+
+          <button class="ghost" id="btn-limpar-filtros">
+            Limpar
+          </button>
+        </div>
+
+        <div id="lista-ordens" class="list"></div>
+      </section>
+
+      <!-- DETALHE -->
+      <section id="view-detalhe" class="view">
+
+        <div class="header-actions no-print">
+          <button class="ghost" id="btn-voltar-lista">
+            Voltar
+          </button>
+
+          <button class="primary" id="btn-editar">
+            Editar
+          </button>
+
+          <button class="danger" id="btn-excluir">
+            Excluir
+          </button>
+
+          <button class="ghost" id="btn-imprimir">
+            Imprimir
+          </button>
+        </div>
+
+        <div id="area-impressao" class="area-impressao">
+
+          <div class="print-header">
+            <div>
+              <strong class="print-brand">
+                Assistência Técnica
+              </strong>
+
+              <h1 id="detalhe-title">
+                Ordem de Serviço
+              </h1>
+
+              <p id="detalhe-subtitle"></p>
+            </div>
+
+            <div class="print-os-label">
+              LAUDO / ORDEM DE SERVIÇO
+            </div>
+          </div>
+
+          <div id="detalhe-conteudo" class="detail-grid"></div>
+
+          <div class="assinaturas-print">
+            <div>
+              <span></span>
+              Técnico responsável
+            </div>
+
+            <div>
+              <span></span>
+              Cliente
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
