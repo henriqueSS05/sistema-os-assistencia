@@ -328,6 +328,33 @@ function removerFotoForm(i) {
   renderFotosForm();
 }
 
+function mensagemErroFoto(error) {
+  const msg = String(error.message || error.error || error);
+  const baixa = msg.toLowerCase();
+
+  if (baixa.includes("bucket not found")) {
+    return 'O espaço "fotos-os" não existe no Supabase. Rode o supabase.sql no SQL Editor.';
+  }
+
+  if (baixa.includes("row-level security") || baixa.includes("violates") || baixa.includes("unauthorized")) {
+    return "Sem permissão para enviar. Rode o supabase.sql (parte das fotos) no Supabase.";
+  }
+
+  if (baixa.includes("mime")) {
+    return "Tipo de arquivo não aceito pelo Supabase.";
+  }
+
+  if (baixa.includes("size") || baixa.includes("too large") || baixa.includes("exceed")) {
+    return "A foto é grande demais para o limite do Supabase.";
+  }
+
+  if (baixa.includes("failed to fetch") || baixa.includes("network")) {
+    return "Sem conexão com o Supabase. Confira a internet e o config.js.";
+  }
+
+  return `Erro ao enviar as fotos: ${msg}`;
+}
+
 async function enviarFotosNovas() {
   const enviadas = [];
 
@@ -346,7 +373,7 @@ async function enviarFotosNovas() {
     if (error) {
       console.error(error);
       await removerDoStorage(enviadas);
-      throw new Error("Erro ao enviar as fotos.");
+      throw new Error(mensagemErroFoto(error));
     }
 
     const { data } = supabaseClient
@@ -439,7 +466,7 @@ function dataBR(iso) {
   return d.toLocaleString("pt-BR");
 }
 
-function toast(texto) {
+function toast(texto, ms = 2400) {
   const t = $("toast");
 
   t.textContent = texto;
@@ -448,7 +475,7 @@ function toast(texto) {
 
   setTimeout(() => {
     t.classList.remove("show");
-  }, 2400);
+  }, ms);
 }
 
 function showView(nome) {
@@ -633,7 +660,7 @@ async function salvarOSInterno(evento) {
 
     enviadas = await enviarFotosNovas();
   } catch (e) {
-    return toast(e.message);
+    return toast(e.message, 9000);
   }
 
   dados.fotos = [
