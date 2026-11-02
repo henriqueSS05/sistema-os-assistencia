@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | FixOS</title>
+  <link rel="stylesheet" href="login.css">
+  <link rel="icon" type="image/svg+xml" href="apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="apple-touch-icon.png" />
+  <link rel="shortcut icon" href="apple-touch-icon.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+</head>
+<body>
+
+  <main class="login-container">
+    <div class="login-card">
+
+      <div class="logo">F</div>
+
+      <h1>FixOS</h1>
+      <p class="subtitle">Assistência Técnica</p>
+
+      <h2>Acesse sua conta</h2>
+      <p class="description">
+        Entre para acessar o sistema.
+      </p>
+
+      <form id="login-form">
+
+        <label for="email">E-mail</label>
+        <input
+          type="email"
+          id="email"
+          placeholder="seu@email.com"
+          required
+        >
+
+        <label for="senha">Senha</label>
+        <input
+          type="password"
+          id="senha"
+          placeholder="Digite sua senha"
+          required
+        >
+
+        <p id="erro-login"></p>
+
+        <button type="submit" id="btn-login">
+          Entrar no sistema
+        </button>
+
+      </form>
+
+      <footer>
+        FixOS • Sistema de Gestão Técnica
+      </footer>
+
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="login.js"></script>
+
+</body>
+</html>

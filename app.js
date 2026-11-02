@@ -1497,8 +1497,48 @@ document
     }
   );
 
-/* INICIALIZAÇÃO */
 
-renderTestesRapidos();
-renderFotosForm();
-carregarDashboard();
+/* INICIALIZAÇÃO SEGURA */
+
+async function iniciarSistema() {
+  const { data, error } =
+    await supabaseClient.auth.getSession();
+
+  if (error || !data.session) {
+    window.location.replace("login.html");
+    return;
+  }
+
+  // Só exibe o sistema após confirmar a sessão.
+  document.body.style.display = "";
+
+  // Detecta quando a sessão deixa de existir.
+  supabaseClient.auth.onAuthStateChange(
+    (event, session) => {
+      if (event === "SIGNED_OUT" || !session) {
+        window.location.replace("login.html");
+      }
+    }
+  );
+
+  renderTestesRapidos();
+  renderFotosForm();
+
+  carregarDashboard();
+}
+
+iniciarSistema();
+$("btn-logout").addEventListener("click", async () => {
+  const confirmar = confirm("Deseja realmente sair do sistema?");
+
+  if (!confirmar) return;
+
+  const { error } = await supabaseClient.auth.signOut();
+
+  if (error) {
+    console.error(error);
+    return toast("Erro ao sair do sistema.");
+  }
+
+  window.location.replace("login.html");
+});
