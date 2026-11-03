@@ -744,3 +744,22 @@ input[readonly]{background:var(--brand-soft);font-weight:800;color:var(--brand)}
     white-space:nowrap;
   }
 }
+ /* ===== CORREÇÃO DOS TESTES NO TEMA ESCURO ===== */
+
+:root[data-theme="dark"] .seg-btn.ok.on {
+  background: #16a36a !important;
+  border-color: #16a36a !important;
+  color: #ffffff !important;
+}
+
+:root[data-theme="dark"] .seg-btn.falha.on {
+  background: #dc3545 !important;
+  border-color: #dc3545 !important;
+  color: #ffffff !important;
+}
+
+:root[data-theme="dark"] .seg-btn:not(.on) {
+  background: #151c2b;
+  color: #a4aec4;
+  border-color: #30394d;
+}
