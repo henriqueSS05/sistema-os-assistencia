@@ -353,3 +353,44 @@ input[readonly]{background:var(--brand-soft);font-weight:800;color:var(--brand)}
   .teste-chip{font-size:7px !important;padding:.2mm 1.2mm !important;border-radius:2px !important;border:1px solid #888 !important;background:#fff !important;color:#000 !important}
   .teste-chip.falha{font-weight:bold !important;text-decoration:underline !important}
 }
+
+/* ===== TEMA ESCURO ===== */
+.theme-toggle{
+  display:flex;align-items:center;gap:12px;width:100%;padding:11px 14px;margin:0 0 10px;
+  border:1px solid rgba(255,255,255,.12);border-radius:12px;background:rgba(255,255,255,.07);
+  color:#e7e9ff;font-weight:600;text-align:left;transition:background .2s,border-color .2s,transform .2s;
+}
+.theme-toggle:hover{background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.24);transform:translateY(-1px)}
+.theme-toggle-icon{display:grid;place-items:center;width:22px;font-size:20px;line-height:1}
+.theme-toggle-label{font-size:13px}
+
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#111522;--surface:#1b2232;--ink:#edf0fa;--muted:#a4aec4;--line:#30394d;
+  --side:#0b1020;--side-ink:#aab4cc;--brand-soft:#292d50;
+  --shadow:0 1px 2px rgba(0,0,0,.22),0 8px 24px rgba(0,0,0,.18);
+}
+:root[data-theme="dark"] .panel .list-item,
+:root[data-theme="dark"] .detail-card,
+:root[data-theme="dark"] .teste-row{background:#20293a}
+:root[data-theme="dark"] input,
+:root[data-theme="dark"] select,
+:root[data-theme="dark"] textarea,
+:root[data-theme="dark"] .seg-btn{background:#151c2b;color:var(--ink);border-color:var(--line)}
+:root[data-theme="dark"] input:focus,
+:root[data-theme="dark"] select:focus,
+:root[data-theme="dark"] textarea:focus{background:#1b2232}
+:root[data-theme="dark"] input::placeholder,
+:root[data-theme="dark"] textarea::placeholder{color:#7f8aa3}
+:root[data-theme="dark"] .ghost:hover{background:#292d50;border-color:#454b78}
+:root[data-theme="dark"] .dropzone{border-color:#454b78}
+:root[data-theme="dark"] .dropzone:hover{background:#292d50}
+:root[data-theme="dark"] .foto-item{background:#20293a}
+:root[data-theme="dark"] .danger{background:#3b2029;border-color:#65313c}
+:root[data-theme="dark"] .danger:hover{background:var(--bad);color:#fff}
+:root[data-theme="dark"] .theme-toggle{background:rgba(255,255,255,.12)}
+:root[data-theme="dark"] .theme-toggle-icon{font-size:19px}
+
+@media (prefers-reduced-motion:no-preference){
+  body,.card,.panel,.section-card,.list-item,input,select,textarea{transition:background-color .2s ease,color .2s ease,border-color .2s ease}
+}

@@ -1498,6 +1498,61 @@ document
   );
 
 
+/* TEMA CLARO / ESCURO */
+const THEME_STORAGE_KEY = "fixos_tema";
+
+function aplicarTema(tema) {
+  const temaAtual = tema === "dark" ? "dark" : "light";
+  document.documentElement.setAttribute("data-theme", temaAtual);
+
+  const botaoTema = $("theme-toggle");
+  if (botaoTema) {
+    const escuroAtivo = temaAtual === "dark";
+    botaoTema.setAttribute("aria-pressed", String(escuroAtivo));
+    botaoTema.setAttribute(
+      "aria-label",
+      escuroAtivo ? "Ativar tema claro" : "Ativar tema escuro"
+    );
+
+    const icone = botaoTema.querySelector(".theme-toggle-icon");
+    const legenda = botaoTema.querySelector(".theme-toggle-label");
+    if (icone) icone.textContent = escuroAtivo ? "☀" : "☾";
+    if (legenda) legenda.textContent = escuroAtivo ? "Tema claro" : "Tema escuro";
+  }
+
+  const metaTheme = document.querySelector('meta[name="theme-color"]');
+  if (metaTheme) metaTheme.setAttribute("content", temaAtual === "dark" ? "#111522" : "#5b5bf0");
+}
+
+function inicializarTema() {
+  let temaSalvo = "light";
+  try {
+    temaSalvo = localStorage.getItem(THEME_STORAGE_KEY) || "light";
+  } catch (erro) {
+    console.warn("Não foi possível recuperar a preferência de tema.", erro);
+  }
+
+  aplicarTema(temaSalvo);
+
+  const botaoTema = $("theme-toggle");
+  if (botaoTema) {
+    botaoTema.addEventListener("click", () => {
+      const proximoTema = document.documentElement.getAttribute("data-theme") === "dark"
+        ? "light"
+        : "dark";
+
+      aplicarTema(proximoTema);
+      try {
+        localStorage.setItem(THEME_STORAGE_KEY, proximoTema);
+      } catch (erro) {
+        console.warn("Não foi possível salvar a preferência de tema.", erro);
+      }
+    });
+  }
+}
+
+inicializarTema();
+
 /* INICIALIZAÇÃO SEGURA */
 
 async function iniciarSistema() {
