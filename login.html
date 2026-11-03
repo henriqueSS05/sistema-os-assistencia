@@ -4,24 +4,51 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#5b5bf0">
   <title>Login | FixOS</title>
+
   <link rel="stylesheet" href="login.css">
-  <link rel="icon" type="image/svg+xml" href="apple-touch-icon.png" />
-  <link rel="icon" type="image/png" sizes="32x32" href="apple-touch-icon.png" />
-  <link rel="shortcut icon" href="apple-touch-icon.png" />
-  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="icon" type="image/svg+xml" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="apple-touch-icon.png">
+  <link rel="shortcut icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <script>
+    try {
+      const tema = localStorage.getItem("fixos_tema") || "light";
+      document.documentElement.setAttribute(
+        "data-theme",
+        tema === "dark" ? "dark" : "light"
+      );
+    } catch (e) {}
+  </script>
 </head>
+
 <body>
 
   <main class="login-container">
+
+    <!-- BOTÃO DE TEMA -->
+    <button
+      type="button"
+      id="theme-toggle-login"
+      class="theme-toggle-login"
+      aria-label="Ativar tema escuro"
+      aria-pressed="false"
+    >
+      <span id="theme-icon">🌙</span>
+      <span id="theme-label">Tema escuro</span>
+    </button>
+
     <div class="login-card">
 
-      <div class="logo">F</div>
+      <div class="logo"><img src="favicon-32.png"></div>
 
       <h1>FixOS</h1>
       <p class="subtitle">Assistência Técnica</p>
 
       <h2>Acesse sua conta</h2>
+
       <p class="description">
         Entre para acessar o sistema.
       </p>
@@ -29,6 +56,7 @@
       <form id="login-form">
 
         <label for="email">E-mail</label>
+
         <input
           type="email"
           id="email"
@@ -37,6 +65,7 @@
         >
 
         <label for="senha">Senha</label>
+
         <input
           type="password"
           id="senha"
